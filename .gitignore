@@ -1,0 +1,38 @@
+# ---- Data (never commit the full dataset) ----
+data/raw/
+data/full/
+*.parquet
+# keep the small sample that ships with the repo
+!data/sample/*.csv
+
+# ---- Trained models & Spark streaming state ----
+models/*
+!models/.gitkeep
+checkpoint/
+output/
+spark-warehouse/
+metastore_db/
+derby.log
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# ---- Notebooks ----
+.ipynb_checkpoints/
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ---- Logs ----
+*.log

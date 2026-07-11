@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        # Test-only deps (no Spark needed: the unit tests are pure-Python /
+        # pandas and cover data generation, validation and batching logic).
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas numpy kafka-python pytest ruff
+
+      - name: Lint with ruff
+        run: ruff check src tests
+
+      - name: Run tests
+        run: pytest -v

@@ -1,0 +1,21 @@
+[project]
+name = "realtime-traffic-severity-pipeline"
+version = "1.0.0"
+description = "Real-time streaming ML pipeline: Kafka -> Spark Structured Streaming -> MLlib severity prediction -> live dashboard"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+# Let tests import the modules under src/ without installing a package.
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+# A pragmatic set: pyflakes (F), pycodestyle (E/W), isort (I), bugbear (B).
+select = ["E", "F", "W", "I", "B"]
+# E402: some scripts set PYSPARK_SUBMIT_ARGS via os.environ before importing
+# pyspark, which is intentional; E501 long lines handled by line-length above.
+ignore = ["E402"]
